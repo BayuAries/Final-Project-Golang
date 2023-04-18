@@ -46,7 +46,10 @@ func CreateSocialMedia(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusCreated, SocialMedia)
+	c.JSON(http.StatusCreated, gin.H{
+		"message": "Social Media Create successfully!",
+		"data":    SocialMedia,
+	})
 }
 
 // Update Social Media Function
@@ -77,7 +80,10 @@ func UpdateSocialMedia(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusOK, SocialMedia)
+	c.JSON(http.StatusOK, gin.H{
+		"message": "Update Social Media successfully!",
+		"data":    SocialMedia,
+	})
 }
 
 // Get One Social Media Function
@@ -103,7 +109,10 @@ func GetOneSocialMedia(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusOK, SocialMedia)
+	c.JSON(http.StatusOK, gin.H{
+		"message": "Get Social Media successfully!",
+		"data":    SocialMedia,
+	})
 }
 
 // Get All Social Media Function
@@ -121,7 +130,10 @@ func GetAllSocialMedia(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusOK, SocialMedia)
+	c.JSON(http.StatusOK, gin.H{
+		"message": "Get Social Media successfully!",
+		"data":    SocialMedia,
+	})
 }
 
 // Delete Social Media Function

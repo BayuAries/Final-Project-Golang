@@ -16,7 +16,6 @@ func CreateComment(c *gin.Context) {
 	db := database.GetDB()
 	userData := c.MustGet("userData").(jwt.MapClaims)
 	contentType := helpers.GetContentType(c)
-	photoId, _ := strconv.Atoi(c.Param("photoId"))
 
 	Comment := models.Comment{}
 	Photo := models.Photo{}
@@ -27,6 +26,7 @@ func CreateComment(c *gin.Context) {
 	} else {
 		c.ShouldBind(&Comment)
 	}
+	photoId := &Comment.PhotoID
 
 	// Check Photo with id exist
 	err := db.Select("title").First(&Photo, "id = ?", photoId).Error
@@ -39,7 +39,6 @@ func CreateComment(c *gin.Context) {
 	}
 
 	Comment.UserID = userID
-	Comment.PhotoID = uint(photoId)
 
 	err = db.Debug().Create(&Comment).Error
 
@@ -51,7 +50,10 @@ func CreateComment(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusCreated, Comment)
+	c.JSON(http.StatusCreated, gin.H{
+		"message": "Comment create successfully!",
+		"data":    Comment,
+	})
 }
 
 // UpdateComment function
@@ -59,7 +61,6 @@ func UpdateComment(c *gin.Context) {
 	db := database.GetDB()
 	userData := c.MustGet("userData").(jwt.MapClaims)
 	contentType := helpers.GetContentType(c)
-	photoId, _ := strconv.Atoi(c.Param("photoId"))
 	commentId, _ := strconv.Atoi(c.Param("commentId"))
 
 	Comment := models.Comment{}
@@ -73,10 +74,9 @@ func UpdateComment(c *gin.Context) {
 
 	Comment.UserID = userID
 	Comment.ID = uint(commentId)
-	Comment.PhotoID = uint(photoId)
 
 	// Check if Data Exist
-	err := db.Select("id").First(&Comment, "id = ? AND photo_id = ?", commentId, photoId).Error
+	err := db.Select("id").First(&Comment, "id = ? ", commentId).Error
 	if err != nil {
 		c.JSON(http.StatusNotFound, gin.H{
 			"error":   "Data Not Found",
@@ -86,7 +86,7 @@ func UpdateComment(c *gin.Context) {
 	}
 
 	// err := db.Model(&Comment).Where("id = ? AND photo_id = ?", commentId, photoId).Updates(models.Comment{Message: Comment.Message}).Error
-	err = db.Model(&Comment).Where("id = ? ", commentId).Where("photo_id = ?", photoId).Updates(models.Comment{Message: Comment.Message}).Error
+	err = db.Model(&Comment).Where("id = ? ", commentId).Updates(models.Comment{Message: Comment.Message}).Error
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"error":   "Bad Request",
@@ -95,18 +95,20 @@ func UpdateComment(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusOK, Comment)
+	c.JSON(http.StatusOK, gin.H{
+		"message": "Update Comment successfully!",
+		"data":    Comment,
+	})
 }
 
 // GetOneComment function
 func GetOneComment(c *gin.Context) {
 	db := database.GetDB()
-	photoId, _ := strconv.Atoi(c.Param("photoId"))
 	commentId, _ := strconv.Atoi(c.Param("commentId"))
 
 	Comment := models.Comment{}
 
-	err := db.Model(&Comment).Preload("Photo").Preload("User").First(&Comment, "id = ? AND photo_id = ?", commentId, photoId).Error
+	err := db.Model(&Comment).Preload("Photo").Preload("User").First(&Comment, "id = ? ", commentId).Error
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"error":   "Bad Request",
@@ -115,7 +117,10 @@ func GetOneComment(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusOK, Comment)
+	c.JSON(http.StatusOK, gin.H{
+		"message": "Get Comment successfully!",
+		"data":    Comment,
+	})
 }
 
 // GetAllComment function
@@ -144,18 +149,20 @@ func GetAllComment(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusOK, Comment)
+	c.JSON(http.StatusOK, gin.H{
+		"message": "Get Comments successfully!",
+		"data":    Comment,
+	})
 }
 
 // DeleteComment function
 func DeleteComment(c *gin.Context) {
 	db := database.GetDB()
-	photoId, _ := strconv.Atoi(c.Param("photoId"))
 	commentId, _ := strconv.Atoi(c.Param("commentId"))
 
 	Comment := models.Comment{}
 
-	err := db.Model(&Comment).Delete(&Comment, "id = ? AND photo_id = ?", commentId, photoId).Error
+	err := db.Model(&Comment).Delete(&Comment, "id = ?", commentId).Error
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"error":   "Bad Request",

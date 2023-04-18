@@ -37,7 +37,10 @@ func CreatePhoto(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusCreated, Photo)
+	c.JSON(http.StatusCreated, gin.H{
+		"message": "Photo create successfully!",
+		"data":   Photo,
+	})
 }
 
 // UpdatePhoto function
@@ -68,7 +71,10 @@ func UpdatePhoto(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusOK, Photo)
+	c.JSON(http.StatusOK, gin.H{
+		"message": "Update Photo successfully!",
+		"data":   Photo,
+	})
 }
 
 // GetOne Photo function
@@ -88,7 +94,10 @@ func GetOnePhoto(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusOK, Photo)
+	c.JSON(http.StatusOK, gin.H{
+		"message": "Get Photo successfully!",
+		"data":   Photo,
+	})
 }
 
 // GetAll Photo function
@@ -112,7 +121,10 @@ func GetAllPhoto(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusOK, Photo)
+	c.JSON(http.StatusOK, gin.H{
+		"message": "Get Photos successfully!",
+		"data":   Photo,
+	})
 }
 
 // DeletePhoto function

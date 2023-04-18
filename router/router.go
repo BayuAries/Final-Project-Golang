@@ -37,7 +37,7 @@ func StarApp() *gin.Engine {
 	}
 
 	// Comment Route
-	commentRoute := r.Group("/photo/:photoId/comment")
+	commentRoute := r.Group("/comment")
 	{
 		// Authentication for comment Route
 		commentRoute.Use(middleware.Authentication())
@@ -48,7 +48,7 @@ func StarApp() *gin.Engine {
 		// Get One Comment [GET]
 		commentRoute.GET("/:commentId", controllers.GetOneComment)
 		// Get All Comment [GET]
-		commentRoute.GET("/all", controllers.GetAllComment)
+		commentRoute.GET("/all/:photoId", controllers.GetAllComment)
 		// Delete Comment [DELETE]
 		commentRoute.DELETE("/:commentId", middleware.CommentAuthorization(), controllers.DeleteComment)
 	}

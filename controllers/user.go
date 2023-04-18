@@ -37,10 +37,8 @@ func UserRegister(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusCreated, gin.H{
-		"id":       User.ID,
-		"email":    User.Email,
-		"username": User.UserName,
-		"age":      User.Age,
+		"message": "Data create successfully!",
+		"data":    User,
 	})
 }
 
@@ -84,6 +82,7 @@ func UserLogin(c *gin.Context) {
 	token := helpers.GenerateToken(User.ID, User.Email)
 
 	c.JSON(http.StatusOK, gin.H{
-		"token": token,
+		"message": "Login successfully!",
+		"token":   token,
 	})
 }
