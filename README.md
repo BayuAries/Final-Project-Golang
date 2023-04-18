@@ -10,7 +10,7 @@ The API example app id discribe below
 
 ### Register User
 >POST /users/register
-```JavaScript
+```html
 http://localhost:8080/users/register
 ```
 
@@ -40,7 +40,7 @@ age       : 20
 
 ### Login User
 >POST /users/login
-```JavaScript
+```html
 http://localhost:8080/users/login
 ```
 
@@ -63,7 +63,7 @@ password  : password
 
 ### Create Photo
 >POST /photo
-```JavaScript
+```html
 http://localhost:8080/photo
 ```
 
@@ -100,7 +100,7 @@ Token : <token>
 
 ### Get One Photo
 >GET /photo/:id
-```JavaScript
+```html
 http://localhost:8080/photo/9
 ```
 
@@ -159,7 +159,7 @@ Token : <token>
 
 ### Get All Photo
 >GET /photo/all
-```JavaScript
+```html
 http://localhost:8080/photo/all
 ```
 
@@ -214,7 +214,7 @@ Token : <token>
 
 ### Update Photo
 >PUT /photo/:id
-```JavaScript
+```html
 http://localhost:8080/photo/9
 ```
 
@@ -251,7 +251,7 @@ Token : <token>
 
 ### Delete Photo
 >DELETE /photo/:id
-```JavaScript
+```html
 http://localhost:8080/photo/9
 ```
 #### Authorization
@@ -272,7 +272,7 @@ Token : <token>
 
 ### Create Comment
 >POST /comment
-```JavaScript
+```html
 http://localhost:8080/comment
 ```
 
@@ -308,7 +308,7 @@ Token : <token>
 
 ### Get One Comment
 >GET /comment/:id
-```JavaScript
+```html
 http://localhost:8080/comment/7
 ```
 
@@ -355,7 +355,7 @@ Token : <token>
 
 ### Get All Comment from Photo
 >GET /comment/all/:photo_id
-```JavaScript
+```html
 http://localhost:8080/comment/all/9
 ```
 
@@ -431,7 +431,7 @@ Token : <token>
 
 ### Update Comment
 >PUT /comment/:id
-```JavaScript
+```html
 http://localhost:8080/comment/6
 ```
 
@@ -465,7 +465,7 @@ Token : <token>
 
 ### Delete Comment
 >DELETE /comment/:id
-```JavaScript
+```html
 http://localhost:8080/comment/6
 ```
 #### Authorization
@@ -486,7 +486,7 @@ Token : <token>
 
 ### Create Social Media
 >POST /socialmedia
-```JavaScript
+```html
 http://localhost:8080/socialmedia
 ```
 
@@ -521,7 +521,7 @@ Token : <token>
 
 ### Get One Social Media
 >GET /socialmedia/:id
-```JavaScript
+```html
 http://localhost:8080/socialmedia/5
 ```
 
@@ -557,7 +557,7 @@ Token : <token>
 
 ### Get All Social Media
 >GET /socialmedia/all
-```JavaScript
+```html
 http://localhost:8080/socialmedia/all
 ```
 
@@ -611,7 +611,7 @@ Token : <token>
 
 ### Update Social Media
 >PUT /socialmedia/:id
-```JavaScript
+```html
 http://localhost:8080/socialmedia/5
 ```
 
@@ -645,7 +645,7 @@ Token : <token>
 
 ### Delete Social Media
 >DELETE /socialmedia/:id
-```JavaScript
+```html
 http://localhost:8080/socialmedia/5
 ```
 #### Authorization
